@@ -27,4 +27,9 @@
         android:name="com.example.bottomnavigation.ui.activity.CustomActivity"
         android:label="@string/title_custom"
         tools:layout="@layout/activity_custom" />
+    <fragment
+        android:id="@+id/navigation_logout"
+        android:name="com.example.bottomnavigation.ui.logout.LogoutFragment"
+        android:label="LogoutFragment"
+        tools:layout="@layout/fragment_logout"/>
 </navigation>

@@ -1,21 +1,45 @@
 package com.example.bottomnavigation.ui.logout
 
 import android.os.Bundle
-import android.support.v4.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.example.bottomnavigation.R
+import android.widget.TextView
+import android.support.v4.app.Fragment
+import android.arch.lifecycle.ViewModelProvider
+import com.example.bottomnavigation.databinding.FragmentLogoutBinding
 
-class LogoutFragment:Fragment() {
+class LogoutFragment : Fragment() {
+
+    private var _binding: FragmentLogoutBinding? = null
+
+    // This property is only valid between onCreateView and
+    // onDestroyView.
+    private val binding get() = _binding!!
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        var root=inflater.inflate(R.layout.fragment_logout,container,false)
-        return root;
+        val LogoutViewModel =
+            ViewModelProvider(
+                this,
+                ViewModelProvider.NewInstanceFactory()
+            ).get(LogoutViewModel::class.java)
 
+        _binding = FragmentLogoutBinding.inflate(inflater, container, false)
+        val root: View = binding.root
 
+        val textView: TextView = binding.textLogout
+        LogoutViewModel.text.observe(viewLifecycleOwner) {
+            textView.text = it
+        }
+        return root
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 }
